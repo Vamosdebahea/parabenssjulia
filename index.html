@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parabéns, Júlia!</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- Confetti Library (via CDN for simplicity, but could be local) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <!-- TELA DE SENHA -->
+    <section id="lock-screen">
+        <div class="lock-content">
+            <div class="lock-icon">🔒</div>
+            <h1>Área secreta da aniversariante</h1>
+            <p>Antes de entrar… você precisa provar que conhece a aniversariante.</p>
+            
+            <div class="hints">
+                <p class="hint-title">A SUA SENHA É:</p>
+                <div class="hint-math">
+                    <span class="hint-item">O dia que o mundo ganhou uma flamenguista (00)</span>
+                    <span class="operator">+</span>
+                    <span class="hint-item">seu número favorito (00)</span>
+                    <span class="operator">+</span>
+                    <span class="hint-item">o ano do primeiro título mundial do Flamengo (0000)</span>
+                </div>
+            </div>
+
+            <div class="password-input-container">
+                <input type="password" id="password-input" placeholder="Digite a senha" maxlength="8">
+                <button id="unlock-btn">Desbloquear</button>
+            </div>
+            <p id="error-message" class="hidden"></p>
+        </div>
+    </section>
+
+    <!-- CONTEÚDO PRINCIPAL (Oculto inicialmente) -->
+    <main id="main-content" class="hidden">
+        
+        <!-- HEADER / CONTADOR -->
+        <section class="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h2 class="fade-in">Você já viveu:</h2>
+                <div id="life-counter" class="counter">0</div>
+                <span class="days-label">dias</span>
+            </div>
+        </section>
+
+        <!-- TEXTO 1º TEMPO -->
+        <section class="text-section" id="section-1">
+            <div class="container">
+                <h2 class="section-title">1° TEMPO</h2>
+                <div class="typewriter-text" id="text-part-1">
+                    <!-- Texto inserido via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- GALERIA DE FOTOS -->
+        <section class="gallery-section">
+            <div class="container">
+                <h2 class="section-title">Momentos</h2>
+                <div class="gallery-grid">
+                    <!-- Fotos com fallback para placeholder se não existirem -->
+                    <div class="polaroid" style="animation-delay: 0.1s">
+                        <div class="photo-wrapper">
+                            <img src="/julia/fotos/foto1.jpg" onerror="this.src='https://placehold.co/400x500/06b2b8/ffffff?text=Foto+1'" alt="Foto 1">
+                        </div>
+                    </div>
+                    <div class="polaroid" style="animation-delay: 0.2s">
+                        <div class="photo-wrapper">
+                            <img src="/julia/fotos/foto2.jpg" onerror="this.src='https://placehold.co/400x500/A051A8/ffffff?text=Foto+2'" alt="Foto 2">
+                        </div>
+                    </div>
+                    <div class="polaroid" style="animation-delay: 0.3s">
+                        <div class="photo-wrapper">
+                            <img src="/julia/fotos/foto3.jpg" onerror="this.src='https://placehold.co/400x500/000000/ffffff?text=Foto+3'" alt="Foto 3">
+                        </div>
+                    </div>
+                    <div class="polaroid" style="animation-delay: 0.4s">
+                        <div class="photo-wrapper">
+                            <img src="/julia/fotos/foto4.jpg" onerror="this.src='https://placehold.co/400x500/06b2b8/ffffff?text=Foto+4'" alt="Foto 4">
+                        </div>
+                    </div>
+                    <div class="polaroid" style="animation-delay: 0.5s">
+                        <div class="photo-wrapper">
+                            <img src="/julia/fotos/foto5.jpg" onerror="this.src='https://placehold.co/400x500/A051A8/ffffff?text=Foto+5'" alt="Foto 5">
+                        </div>
+                    </div>
+                    <div class="polaroid" style="animation-delay: 0.6s">
+                        <div class="photo-wrapper">
+                            <img src="/julia/fotos/foto6.jpg" onerror="this.src='https://placehold.co/400x500/000000/ffffff?text=Foto+6'" alt="Foto 6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TEXTO 2º TEMPO -->
+        <section class="text-section" id="section-2">
+            <div class="container">
+                <h2 class="section-title">2° TEMPO</h2>
+                <div class="typewriter-text" id="text-part-2">
+                    <!-- Texto inserido via JS -->
+                </div>
+                
+                <div class="nicknames-box hidden" id="nicknames-box">
+                    <h3>APELIDOS:</h3>
+                    <ul id="nicknames-list">
+                        <li>POÇO SEM TAMPA</li>
+                        <li>MUTAÇÃO SEM DESENVOLVIMENTO</li>
+                        <li>ERRO 404</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- MONTE SEU BOLO -->
+        <section class="cake-section">
+            <div class="container">
+                <h2 class="section-title">Monte seu bolo de aniversário</h2>
+                
+                <div class="cake-builder-wrapper">
+                    <div class="cake-display">
+                        <div class="cake-stage">
+                            <div id="cake-topper" class="cake-topper hidden">17</div>
+                            <div id="cake-candles" class="cake-candles hidden">
+                                <div class="candle"><div class="flame"></div></div>
+                                <div class="candle"><div class="flame"></div></div>
+                                <div class="candle"><div class="flame"></div></div>
+                            </div>
+                            <div id="layer-3" class="cake-layer layer-small"></div>
+                            <div id="layer-2" class="cake-layer layer-medium"></div>
+                            <div id="layer-1" class="cake-layer layer-large"></div>
+                            <div class="cake-plate"></div>
+                        </div>
+                    </div>
+
+                    <div class="cake-controls">
+                        <div class="control-group">
+                            <h3>Massa</h3>
+                            <div class="options">
+                                <button class="opt-btn" onclick="updateCake('dough', 'chocolate')" style="background:#5c3a21"></button>
+                                <button class="opt-btn" onclick="updateCake('dough', 'baunilha')" style="background:#f3e5ab"></button>
+                                <button class="opt-btn" onclick="updateCake('dough', 'morango')" style="background:#ff9999"></button>
+                                <button class="opt-btn" onclick="updateCake('dough', 'roxo')" style="background:#A051A8"></button>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <h3>Cobertura</h3>
+                            <div class="options">
+                                <button class="opt-btn" onclick="updateCake('topping', 'chantilly')" style="background:#ffffff; border:1px solid #ddd"></button>
+                                <button class="opt-btn" onclick="updateCake('topping', 'chocolate')" style="background:#3d2616"></button>
+                                <button class="opt-btn" onclick="updateCake('topping', 'azul')" style="background:#06b2b8"></button>
+                                <button class="opt-btn" onclick="updateCake('topping', 'roxo')" style="background:#800080"></button>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <h3>Decoração</h3>
+                            <div class="options">
+                                <button class="opt-btn-text" onclick="updateCake('deco', 'velas')">🕯️</button>
+                                <button class="opt-btn-text" onclick="updateCake('deco', 'estrelas')">⭐</button>
+                                <button class="opt-btn-text" onclick="updateCake('deco', 'confetes')">🎉</button>
+                                <button class="opt-btn-text" onclick="updateCake('deco', 'coracoes')">❤️</button>
+                                <button class="opt-btn-text" onclick="updateCake('deco', 'topper')">17</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="light-candles-btn" class="special-btn">Acender as velas</button>
+                <h1 id="final-message" class="hidden">Parabéns, Júlia!</h1>
+            </div>
+        </section>
+
+        <!-- TEXTO PRORROGAÇÃO -->
+        <section class="text-section" id="section-3">
+            <div class="container">
+                <h2 class="section-title">PRORROGAÇÃO</h2>
+                <div class="typewriter-text" id="text-part-3">
+                    <!-- Texto inserido via JS -->
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Feito com ❤️ por alguém que te atura.</p>
+        </footer>
+
+    </main>
+
+    <!-- Áudio -->
+    <audio id="birthday-audio" src="/julia/audio/parabens.mp3"></audio>
+
+    <!-- JS -->
+    <script src="/js/script.js"></script>
+</body>
+</html>
